@@ -1,12 +1,12 @@
-const express = require('express');
+const express = require("express");
 
-const routes = express.Router();
+const router = express.Router();
 
-routes.get("/", (req, res, next) => {
+router.get("/", (req, res, next) => {
   res.status(200).json({
     ok: true,
-    message: "Request executed successfully"
+    message: "Request executed successfully",
   });
 });
 
-module.exports = routes;
+module.exports = router;

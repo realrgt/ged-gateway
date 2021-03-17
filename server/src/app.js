@@ -9,6 +9,7 @@ dotenv.config();
 
 // routes imports here
 const appRoutes = require("./routes/app");
+const transactionRoutes = require("./routes/transaction");
 
 // allow application to be consumed
 app.use(cors());
@@ -18,6 +19,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 // routes
+app.use("/transaction", transactionRoutes);
 app.use("/", appRoutes);
 
 // executes queries
