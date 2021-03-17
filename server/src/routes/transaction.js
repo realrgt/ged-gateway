@@ -6,7 +6,7 @@ const router = express.Router();
 // ===========================
 // C2B payment
 // ==========================
-router.get("/buy", async (req, res, next) => {
+router.post("/buy", async (req, res, next) => {
   const amount = parseFloat(req.query.amount);
   const phone = req.query.phone;
 
