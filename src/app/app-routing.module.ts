@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MpesaPaymentComponent } from './mpesa-payment/mpesa-payment/mpesa-payment.component';
+import { MpesaPaymentComponent } from './mpesa-payment/mpesa-payment.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/' },
@@ -10,6 +10,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
