@@ -1,0 +1,17 @@
+<form [formGroup]="form">
+
+  <div>
+    <input id="phone" type="text" maxlength="12" formControlName="phone">
+    <button type="submit" (click)="onSubmit()">OK</button>
+  </div>
+
+  <div *ngIf="formControls.phone.invalid && (formControls.phone.dirty || formControls.phone.touched)"
+    class="alert alert-danger">
+
+    <div *ngIf="formControls.phone.errors" style="color: red; font-size: 10pt;">
+      Name is required.
+    </div>
+
+  </div>
+
+</form>
