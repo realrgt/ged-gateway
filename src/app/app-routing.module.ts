@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { MpesaPaymentComponent } from './mpesa-payment/mpesa-payment.component';
+import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: '/' },
-  { path: '', component: MpesaPaymentComponent },
+  { path: '', component: HomeComponent },
 ];
 
 @NgModule({
