@@ -13,7 +13,6 @@ export class TransactionService {
     const transactionRef = this.afs.collection<Transaction>(`transactions`);
 
     const data = {
-      uid: transaction.uid,
       userID: transaction.userID,
       username: transaction.username,
       mpesaPayment: transaction.mpesaPayment,
