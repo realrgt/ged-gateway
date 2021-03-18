@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "ged-gateway": {
+      "hosting": {
+        "ged-gateway": [
+          "ged-gateway"
+        ]
+      }
+    }
+  }
+}

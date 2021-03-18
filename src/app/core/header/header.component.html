@@ -1,0 +1,13 @@
+<div class="header">
+  <div class="brand">ged gateway</div>
+  <div *ngIf="authService.user$ | async as user; else login">
+    <button class="btn-login" (click)="authService.signOut()">SignOut</button>
+  </div>
+
+  <ng-template class="controls" #login>
+    <div>
+      <button class="btn-login" (click)="authService.googleSignIn()">Google</button>
+      <button class="btn-login" (click)="authService.facebookSignIn()">Facebook</button>
+    </div>
+  </ng-template>
+</div>
