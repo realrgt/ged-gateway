@@ -1,10 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 import { Transaction } from '../core/models/transaction.model';
 import { AuthService } from '../core/services/auth.service';
 import { TransactionService } from '../core/services/transaction.service';
 import { MpesaPaymentService } from './mpesa-payment.service';
 
+import Swal from 'sweetalert2';
 @Component({
   selector: 'app-mpesa-payment',
   templateUrl: './mpesa-payment.component.html',
@@ -47,7 +49,14 @@ export class MpesaPaymentComponent implements OnInit {
               await this.transactionService.addTransaction(transaction);
             }
           },
-          (error) => console.error('Something went wrong')
+          () => Swal.fire('Oops...', 'Erro ao processar o pagamento.', 'error'),
+          () => Swal.fire('Ok...', 'Pagamento efectuado com sucesso', 'success')
+        );
+      } else {
+        Swal.fire(
+          'Oops...',
+          'Complete o login para proceder com o pagamento.',
+          'error'
         );
       }
     });
