@@ -18,7 +18,7 @@ export class MpesaPaymentComponent implements OnInit {
     phone: ['258', Validators.required],
   });
 
-  musicList: [string] = ['music1'];
+  musicList: string[] = ['music1'];
 
   constructor(
     private formBuilder: FormBuilder,
