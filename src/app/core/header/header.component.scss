@@ -1,9 +1,30 @@
-.header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  padding: 2rem 3rem;
-  background-color: pink;
-  text-align: center;
-  font-size: 2.5rem;
+.ged-header {
+
+  .outfit {
+    position: relative;
+    img.drums {
+      height: 40vh;
+      width: 100vw;
+      object-fit: cover;
+      object-position: left top;
+    }
+
+    img.logo {
+      z-index: 1;
+      position: absolute;
+      top: 9vh;
+      left: 10vw;
+      width: 13vw;
+    }
+  }
+
+  .ged-nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 2rem 3rem;
+    background-color: pink;
+    text-align: center;
+    font-size: 2.5rem;
+  }
 }
