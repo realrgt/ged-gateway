@@ -1,4 +1,12 @@
 <div class="ged-container">
-  <button class="btn-purchase">Comprar</button>
-  <app-mpesa-payment></app-mpesa-payment>
+
+  <div class="metadata">
+    <img class="album-art" [src]="songs[0].albumArt" alt="albumArt">
+    <div class="album-details">
+      <h3 class="artist">{{ songs[0].artist }}</h3>
+      <p class="album-year">{{ songs[0].album + ' - ' + songs[0].year }}</p>
+      <button class="btn-purchase">Comprar</button>
+    </div>
+  </div>
+  <app-mpesa-payment class="mpesa"></app-mpesa-payment>
 </div>
