@@ -1,18 +1,25 @@
 <div class="ged-header">
   <div class="outfit">
-    <img class="drums" src="../../../assets/img/drums.jpg" alt="ged drams">
-    <img class="logo" src="../../../assets/img/brand.png" alt="ged logo">
+    <img class="drums" src="../../../assets/img/drums.jpg" alt="ged drams" />
+    <img class="logo" src="../../../assets/img/brand.png" alt="ged logo" />
   </div>
   <div class="ged-nav">
-    <div class="brand">ged gateway</div>
+    <div class="brand">Músicas</div>
     <div *ngIf="authService.user$ | async as user; else login">
-      <button class="btn-login" (click)="authService.signOut()">SignOut</button>
+      <img class="profile" [src]="user.photoURL" alt="profile" />
+      {{ "" }}
+      <div class="signout" (click)="authService.signOut()"> Sair </div>
     </div>
 
     <ng-template class="controls" #login>
       <div>
-        <button class="btn-login" (click)="authService.googleSignIn()">Google</button>
-        <button class="btn-login" (click)="authService.facebookSignIn()">Facebook</button>
+        <button class="btn-googgle" (click)="authService.googleSignIn()">
+          <i class="fa fa-google"></i>
+        </button>
+        {{ "" }}
+        <button class="btn-facebook" (click)="authService.facebookSignIn()">
+          <i class="fa fa-facebook-f"></i>
+        </button>
       </div>
     </ng-template>
   </div>
