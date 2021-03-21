@@ -2,19 +2,19 @@
   <div class="metadata-mpesa">
 
     <div class="metadata">
-      <img class="album-art" [src]="song.albumArt" alt="albumArt">
+      <img class="album-art" [src]="song?.albumArt" alt="albumArt">
       <div class="album-details">
-        <h3 class="artist">{{ song.artist }}</h3>
-        <p class="album-year">{{ song.album + ' - ' + song.year }}</p>
+        <h3 class="artist">{{ song?.artist }}</h3>
+        <p class="album-year">{{ song?.album + ' - ' + song?.year }}</p>
         <button *ngIf="!displayPurchase" class="btn-purchase" (click)="this.displayPurchase = true">Comprar</button>
       </div>
     </div>
-    <app-mpesa-payment class="mpesa animate__animated animate__jackInTheBox" *ngIf="displayPurchase">
+    <app-mpesa-payment class="mpesa animate__animated animate__jackInTheBox" *ngIf="displayPurchase" [song]="song">
     </app-mpesa-payment>
   </div>
 
 
-  <div class="playlist" *ngFor="let archive of song.archives">
+  <div class="playlist" *ngFor="let archive of song?.archives">
     <div class="music-tile">
       {{ archive.split('/')[7] }}
     </div>

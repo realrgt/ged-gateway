@@ -9,7 +9,7 @@ import { Song } from '../core/models/song.model';
 export class HomeComponent implements OnInit {
   displayPurchase: boolean = false;
 
-  song: Song = {
+  song: Song | undefined = {
     artist: 'Hillsong United',
     album: 'People',
     year: 2016,

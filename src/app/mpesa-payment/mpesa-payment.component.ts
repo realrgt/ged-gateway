@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Transaction } from '../core/models/transaction.model';
@@ -7,6 +7,7 @@ import { TransactionService } from '../core/services/transaction.service';
 import { MpesaPaymentService } from './mpesa-payment.service';
 
 import Swal from 'sweetalert2';
+import { Song } from '../core/models/song.model';
 @Component({
   selector: 'app-mpesa-payment',
   templateUrl: './mpesa-payment.component.html',
@@ -18,7 +19,7 @@ export class MpesaPaymentComponent implements OnInit {
     phone: ['258', Validators.required],
   });
 
-  musicList: string[] = ['music1'];
+  @Input() song: Song | undefined;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -30,7 +31,8 @@ export class MpesaPaymentComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    this.setAmount(10);
+    const filesCount = this.song?.archives.length || 1;
+    this.setAmount(filesCount * 3);
 
     this.authService.user$.subscribe((user) => {
       if (user) {
@@ -42,8 +44,9 @@ export class MpesaPaymentComponent implements OnInit {
               const transaction: Transaction = {
                 userID: user.uid,
                 username: user.displayName,
+                amount: this.form.value.amount,
                 mpesaPayment,
-                content: this.musicList,
+                content: this.song?.archives,
               };
 
               await this.transactionService.addTransaction(transaction);

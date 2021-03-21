@@ -12,9 +12,10 @@ export class TransactionService {
   ): Promise<DocumentReference<Transaction>> {
     const transactionRef = this.afs.collection<Transaction>(`transactions`);
 
-    const data = {
+    const data: Transaction = {
       userID: transaction.userID,
       username: transaction.username,
+      amount: transaction.amount,
       mpesaPayment: transaction.mpesaPayment,
       content: transaction.content,
     };
