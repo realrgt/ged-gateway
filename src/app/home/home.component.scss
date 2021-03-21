@@ -1,50 +1,68 @@
 .ged-container {
-  display: flex;
-  flex-direction: row;
   padding: 3% 11%;
-  justify-content: space-between;
 
-  .metadata {
+  .metadata-mpesa {
     display: flex;
     flex-direction: row;
-    width: 40vw;
-    // background-color: green;
+    justify-content: space-between;
 
-    .album-art {
-      width: 150px;
-      height: 170px;
-      object-fit: cover;
-      border-radius: 1rem;
-    }
-
-    .album-details {
-      padding-top: 10%;
-      padding-left: 5%;
+    .metadata {
       display: flex;
-      flex-direction: column;
-      color: #e4e4e4;
+      flex-direction: row;
+      width: 40vw;
+      // background-color: green;
 
-      .artist {
-        font-size: 16pt;
+      .album-art {
+        width: 150px;
+        height: 170px;
+        object-fit: cover;
+        border-radius: 1rem;
       }
 
-      .album-year {
-        font-size: 14pt;
-        padding: 1.3rem 0px;
-      }
-
-      .btn-purchase {
-        background-color: #f70f5d;
-        padding: 0.5rem 0px;
+      .album-details {
+        padding-top: 10%;
+        padding-left: 5%;
+        display: flex;
+        flex-direction: column;
         color: #e4e4e4;
-        font-weight: bold;
-        border-radius: 0.6rem;
-        border: #f70f5d solid 1px;
+
+        .artist {
+          font-size: 16pt;
+        }
+
+        .album-year {
+          font-size: 14pt;
+          padding: 1.3rem 0px;
+        }
+
+        .btn-purchase {
+          background-color: #f70f5d;
+          padding: 0.5rem 0px;
+          color: #e4e4e4;
+          font-weight: bold;
+          border-radius: 0.6rem;
+          border: #f70f5d solid 1px;
+        }
       }
     }
+
+    .mpesa {
+      width: 40vw;
+    }
+
+    margin-bottom: 6rem;
   }
 
-  .mpesa {
-    width: 40vw;
+  .playlist {
+    background-color: #2e2e2e;
+    border-radius: 0.5rem;
+
+    .music-tile {
+      padding: 1rem 2rem;
+      margin: 2rem 1rem;
+      color: #e4e4e4;
+      font-size: 11pt;
+      font-weight: bold;
+    }
   }
 }

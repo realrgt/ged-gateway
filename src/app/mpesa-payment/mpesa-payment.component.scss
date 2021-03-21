@@ -34,6 +34,8 @@
         padding: 1rem 2rem;
         border-right: #fff;
         box-sizing: border-box;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
       }
 
       button {
@@ -43,6 +45,8 @@
         background-color: #f70f5d;
         color: #fff;
         font-weight: bold;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
       }
     }
   }
