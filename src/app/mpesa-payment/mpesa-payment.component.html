@@ -1,17 +1,28 @@
-<form [formGroup]="form">
-
-  <div>
-    <input id="phone" type="text" maxlength="12" formControlName="phone">
-    <button type="submit" (click)="onSubmit()">OK</button>
+<div class="pay-container">
+  <div class="pay-instructions">
+    <h3>Instruções</h3>
+    <p>1. Digitar um número com mpesa activo</p>
+    <p>2. Responder à notificação USSD no seu celular</p>
   </div>
+  <div class="mpesa">
+    <form [formGroup]="form">
 
-  <div *ngIf="formControls.phone.invalid && (formControls.phone.dirty || formControls.phone.touched)"
-    class="alert alert-danger">
+      <img class="logo-mpesa" src="../../assets/img/mpesa..jpg" alt="vodafone-mpesa-mozambique" width="200">
 
-    <div *ngIf="formControls.phone.errors" style="color: red; font-size: 10pt;">
-      Name is required.
-    </div>
+      <div class="input-btn">
+        <input id="phone" type="text" maxlength="12" formControlName="phone">
+        <button type="submit" (click)="onSubmit()">OK</button>
+      </div>
 
+      <div *ngIf="formControls.phone.invalid && (formControls.phone.dirty || formControls.phone.touched)"
+        class="alert alert-danger">
+
+        <div *ngIf="formControls.phone.errors" style="color: red; font-size: 10pt;">
+          Name is required.
+        </div>
+
+      </div>
+
+    </form>
   </div>
-
-</form>
+</div>

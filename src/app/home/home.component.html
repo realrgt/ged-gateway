@@ -5,8 +5,9 @@
     <div class="album-details">
       <h3 class="artist">{{ songs[0].artist }}</h3>
       <p class="album-year">{{ songs[0].album + ' - ' + songs[0].year }}</p>
-      <button class="btn-purchase">Comprar</button>
+      <button *ngIf="!displayPurchase" class="btn-purchase" (click)="this.displayPurchase = true">Comprar</button>
     </div>
   </div>
-  <app-mpesa-payment class="mpesa"></app-mpesa-payment>
+  <app-mpesa-payment class="mpesa animate__animated animate__jackInTheBox" *ngIf="displayPurchase">
+  </app-mpesa-payment>
 </div>

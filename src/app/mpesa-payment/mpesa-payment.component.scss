@@ -1,0 +1,49 @@
+.pay-container {
+  margin-top: 8vh;
+  display: flex;
+  justify-content: space-between;
+
+  .pay-instructions {
+    font-size: 12pt;
+    color: #fff;
+
+    h3 {
+      font-size: 16pt;
+      margin-bottom: 1rem;
+    }
+
+    p {
+      padding: 0.4rem 0px;
+    }
+  }
+  .mpesa {
+    display: flex;
+    flex-direction: column;
+
+    .logo-mpesa {
+      width: 13rem;
+      margin-left: 20%;
+    }
+
+    .input-btn {
+      display: flex;
+      align-items: center;
+
+      input[type="text"] {
+        width: 100%;
+        padding: 1rem 2rem;
+        border-right: #fff;
+        box-sizing: border-box;
+      }
+
+      button {
+        height: 4rem;
+        padding: 0.5rem 1rem;
+        border-left: #fff;
+        background-color: #f70f5d;
+        color: #fff;
+        font-weight: bold;
+      }
+    }
+  }
+}
