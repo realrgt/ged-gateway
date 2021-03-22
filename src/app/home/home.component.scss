@@ -58,6 +58,8 @@
     border-radius: 0.5rem;
 
     .music-tile {
+      display: flex;
+      justify-content: space-between;
       padding: 1rem 2rem;
       margin: 2rem 1rem;
       color: #e4e4e4;

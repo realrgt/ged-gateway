@@ -1,0 +1,10 @@
+{
+  "/api": {
+    "target": "http://gedlab.handza.co.mz/wp-content/uploads",
+    "secure": false,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

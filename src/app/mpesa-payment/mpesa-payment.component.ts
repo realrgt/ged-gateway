@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { Transaction } from '../core/models/transaction.model';
@@ -20,6 +20,9 @@ export class MpesaPaymentComponent implements OnInit {
   });
 
   @Input() song: Song | undefined;
+
+  @Output()
+  displayDownloadButtonEvent = new EventEmitter<boolean>();
 
   constructor(
     private formBuilder: FormBuilder,
@@ -48,6 +51,8 @@ export class MpesaPaymentComponent implements OnInit {
                 mpesaPayment,
                 content: this.song?.archives,
               };
+
+              this.displayDownloadButtonEvent.emit(true);
 
               await this.transactionService.addTransaction(transaction);
             }

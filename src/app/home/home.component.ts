@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+
 import { Song } from '../core/models/song.model';
+import { FileService } from '../core/services/file.service';
+import * as fileSaver from 'file-saver';
 
 @Component({
   selector: 'app-home',
@@ -8,6 +11,7 @@ import { Song } from '../core/models/song.model';
 })
 export class HomeComponent implements OnInit {
   displayPurchase: boolean = false;
+  displayDownloadButton: boolean = false;
 
   song: Song | undefined = {
     artist: 'Hillsong United',
@@ -22,11 +26,24 @@ export class HomeComponent implements OnInit {
     ],
   };
 
-  constructor() {}
+  constructor(private fileService: FileService) {}
 
   ngOnInit(): void {}
 
-  public onPurchase(): void {
-    this.displayPurchase = !this.displayPurchase;
+  public onSingleDownload(fileURL: string, fileName: string): void {
+    this.fileService.downloadFile(fileURL).subscribe(
+      (res) => {
+        console.log(res);
+
+        const blob: any = new Blob([res], {
+          type: 'text/json; charset=utf-8',
+        });
+        const url = window.URL.createObjectURL(blob);
+        //window.open(url);
+        //window.location.href = res.url;
+        fileSaver.saveAs(blob, fileName);
+      },
+      (error) => console.log(error)
+    );
   }
 }
