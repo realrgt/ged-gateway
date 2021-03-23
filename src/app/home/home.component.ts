@@ -1,17 +1,33 @@
-import { Component, OnInit } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  OnChanges,
+  OnInit,
+  SimpleChanges,
+  ViewChild,
+} from '@angular/core';
 
 import { Song } from '../core/models/song.model';
 import { FileService } from '../core/services/file.service';
 import * as fileSaver from 'file-saver';
+import { ModalService } from '../core/modal';
+import { ModalComponent } from '../core/modal/modal.component';
+import { AuthService } from '../core/services/auth.service';
+
+import { take } from 'rxjs/operators';
+import { Observable, Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent implements OnInit, AfterViewInit {
   displayPurchase: boolean = false;
   displayDownloadButton: boolean = false;
+
+  @ViewChild(ModalComponent)
+  public modal: ModalComponent | undefined;
 
   song: Song | undefined = {
     artist: 'Hillsong United',
@@ -26,9 +42,25 @@ export class HomeComponent implements OnInit {
     ],
   };
 
-  constructor(private fileService: FileService) {}
+  constructor(
+    private fileService: FileService,
+    private modalService: ModalService,
+    public authService: AuthService
+  ) {}
 
   ngOnInit(): void {}
+
+  ngAfterViewInit(): void {
+    this.authService.user$.pipe(take(1)).subscribe((user) => {
+      console.log(user);
+
+      if (!user) {
+        this.modal?.open();
+      } else {
+        this.modal?.close();
+      }
+    });
+  }
 
   public onSingleDownload(fileURL: string, fileName: string): void {
     this.fileService.downloadFile(fileURL).subscribe(
@@ -39,11 +71,26 @@ export class HomeComponent implements OnInit {
           type: 'text/json; charset=utf-8',
         });
         const url = window.URL.createObjectURL(blob);
-        //window.open(url);
-        //window.location.href = res.url;
+
         fileSaver.saveAs(blob, fileName);
       },
       (error) => console.log(error)
     );
+  }
+
+  openModal(id: string): void {
+    this.modalService.open(id);
+  }
+
+  closeModal(id: string): void {
+    this.modalService.close(id);
+  }
+
+  googleSignIn(): any {
+    this.authService.googleSignIn().then((res) => this.modal?.close());
+  }
+
+  facebookSignIn(): any {
+    this.authService.facebookSignIn().then((res) => this.modal?.close());
   }
 }

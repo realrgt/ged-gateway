@@ -1,0 +1,89 @@
+﻿/* MODAL STYLES
+-------------------------------*/
+jw-modal {
+  /* modals are hidden by default */
+  // display: none;
+
+  .jw-modal {
+    /* modal container fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* z-index must be higher than .jw-modal-background */
+    z-index: 1000;
+
+    margin: auto;
+    max-width: 28vw;
+    max-height: 80vh;
+
+    /* enables scrolling for tall modals */
+    overflow: auto;
+
+    .jw-modal-body {
+      padding: 20px;
+      background: #333333;
+      border-radius: 0.5rem;
+
+      /* margin exposes part of the modal background */
+      margin: 40px;
+
+      /*My code*/
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      img {
+        width: 17rem;
+      }
+
+      h3 {
+        margin: 3rem;
+        font-size: 14pt;
+        color: #e2e2e2;
+      }
+
+      button {
+        display: block;
+        align-self: stretch;
+        padding: 1rem 0rem;
+        font-weight: bold;
+        color: #e2e2e2;
+
+        &.google {
+          background-color: #c21807;
+        }
+        &.facebook {
+          background-color: #076ec2;
+        }
+      }
+
+      .separator {
+        margin: 0.5rem;
+      }
+    }
+  }
+
+  .jw-modal-background {
+    /* modal background fixed across whole screen */
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+
+    /* semi-transparent black  */
+    background-color: #000;
+    opacity: 0.75;
+
+    /* z-index must be below .jw-modal and above everything else  */
+    z-index: 900;
+  }
+}
+
+body.jw-modal-open {
+  /* body overflow is hidden to hide main scrollbar when modal window is open */
+  overflow: hidden;
+}
