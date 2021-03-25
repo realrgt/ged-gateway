@@ -72,3 +72,45 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .ged-header {
+    .outfit {
+      img.drums {
+        height: 26vh;
+        width: 100vw;
+      }
+
+      img.logo {
+        top: 9vh;
+        left: 10vw;
+        width: 36vw;
+      }
+    }
+
+    .ged-nav {
+      padding: 0rem 1.5rem;
+      font-size: 2rem;
+
+      button {
+        font-size: 12pt;
+        border-radius: 50%;
+
+        .fa-google {
+          padding: 0.5rem 0.7rem;
+          color: #c21807;
+          border-radius: 50%;
+        }
+
+        .fa-facebook-f {
+          padding: 0.5rem 1rem;
+          color: #0768c2;
+        }
+
+        i {
+          font-size: 1.8rem;
+        }
+      }
+    }
+  }
+}
