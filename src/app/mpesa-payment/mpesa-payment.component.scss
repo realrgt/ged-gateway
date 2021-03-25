@@ -51,3 +51,28 @@
     }
   }
 }
+
+@media only screen and (max-width: 600px) {
+  .pay-container {
+    margin-top: 6vh;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .pay-instructions {
+      display: none;
+    }
+    .mpesa {
+      align-items: center;
+
+      .logo-mpesa {
+        margin-left: 25%;
+      }
+
+      .input-btn {
+        button {
+          height: 3.5rem;
+        }
+      }
+    }
+  }
+}
