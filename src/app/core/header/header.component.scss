@@ -77,8 +77,9 @@
   .ged-header {
     .outfit {
       img.drums {
-        height: 26vh;
+        height: 20vh;
         width: 100vw;
+        object-position: left bottom;
       }
 
       img.logo {
