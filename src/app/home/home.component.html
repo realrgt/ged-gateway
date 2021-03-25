@@ -17,7 +17,7 @@
 
   <div class="playlist" *ngFor="let archive of song?.archives">
     <div class="music-tile">
-      {{ archive.split("/")[7] }}
+      {{ archive.split("/")[7].split('.')[0] }}
       <i *ngIf="displayDownloadButton" (click)="download(archive, archive.split('/')[7])"
         class="fa fa-download animate__animated animate__jackInTheBox animate__delay-4s 4s"></i>
       {{ ' ' }}

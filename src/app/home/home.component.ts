@@ -25,7 +25,7 @@ import { Download } from '../core/models/download.model';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  displayPurchase: boolean = false;
+  displayPurchase: boolean = true;
   displayDownloadButton: boolean = false;
 
   @ViewChild(ModalComponent)
