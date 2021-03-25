@@ -1,6 +1,7 @@
 import {
   AfterViewInit,
   Component,
+  Inject,
   OnChanges,
   OnInit,
   SimpleChanges,
@@ -8,14 +9,15 @@ import {
 } from '@angular/core';
 
 import { Song } from '../core/models/song.model';
-import { FileService } from '../core/services/file.service';
-import * as fileSaver from 'file-saver';
 import { ModalService } from '../core/modal';
 import { ModalComponent } from '../core/modal/modal.component';
 import { AuthService } from '../core/services/auth.service';
 
 import { take } from 'rxjs/operators';
 import { Observable, Subscription } from 'rxjs';
+import { DOCUMENT } from '@angular/common';
+import { DownloadService } from '../core/services/download.service';
+import { Download } from '../core/models/download.model';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +31,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild(ModalComponent)
   public modal: ModalComponent | undefined;
 
+  download$: Observable<Download> | undefined;
+
   song: Song | undefined = {
     artist: 'Hillsong United',
     album: 'People',
@@ -37,15 +41,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
       'https://i1.wp.com/trevordecker.com/wp-content/uploads/2019/04/Hillsong-United-People-2019-English-Christian-Live-Album.jpg?w=1200&ssl=1',
     archives: [
       'http://gedlab.handza.co.mz/wp-content/uploads/2021/03/Raimundo-Sive-Yehova-Una-Hina2.mp3',
-      'http://gedlab.handza.co.mz/wp-content/uploads/2021/03/Raimundo-Sive-Yehova-Una-Hina2.mp3',
-      'http://gedlab.handza.co.mz/wp-content/uploads/2021/03/Raimundo-Sive-Yehova-Una-Hina2.mp3',
     ],
   };
 
   constructor(
-    private fileService: FileService,
     private modalService: ModalService,
-    public authService: AuthService
+    public authService: AuthService,
+    private downloads: DownloadService,
+    @Inject(DOCUMENT) private document: Document
   ) {}
 
   ngOnInit(): void {}
@@ -62,20 +65,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
     });
   }
 
-  public onSingleDownload(fileURL: string, fileName: string): void {
-    this.fileService.downloadFile(fileURL).subscribe(
-      (res) => {
-        console.log(res);
-
-        const blob: any = new Blob([res], {
-          type: 'text/json; charset=utf-8',
-        });
-        const url = window.URL.createObjectURL(blob);
-
-        fileSaver.saveAs(blob, fileName);
-      },
-      (error) => console.log(error)
-    );
+  download(fileURL: string, fileName: string): any {
+    this.displayDownloadButton = false;
+    this.download$ = this.downloads.download(fileURL, fileName);
   }
 
   openModal(id: string): void {

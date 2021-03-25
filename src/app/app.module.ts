@@ -10,6 +10,7 @@ import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { HomeModule } from './home/home.module';
+import { SAVER, getSaver } from './core/services/saver.provider';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent],
@@ -21,7 +22,7 @@ import { HomeModule } from './home/home.module';
     AngularFireAuthModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [{ provide: SAVER, useFactory: getSaver }],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
