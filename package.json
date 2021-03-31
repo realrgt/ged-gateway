@@ -27,13 +27,15 @@
     "rxjs": "~6.6.0",
     "sweetalert2": "^10.15.6",
     "tslib": "^2.0.0",
-    "zone.js": "~0.11.3"
+    "zone.js": "~0.11.3",
+    "crypto-js": "^4.0.0"
   },
   "devDependencies": {
     "@angular-devkit/architect": ">= 0.900 < 0.1200",
     "@angular-devkit/build-angular": "~0.1102.3",
     "@angular/cli": "~11.2.4",
     "@angular/compiler-cli": "~11.2.5",
+    "@types/crypto-js": "^4.0.1",
     "@types/file-saver": "^2.0.1",
     "@types/jasmine": "~3.6.0",
     "@types/node": "^12.11.1",

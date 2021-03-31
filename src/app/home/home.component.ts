@@ -1,23 +1,16 @@
-import {
-  AfterViewInit,
-  Component,
-  Inject,
-  OnChanges,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
-
-import { Song } from '../core/models/song.model';
-import { ModalService } from '../core/modal';
-import { ModalComponent } from '../core/modal/modal.component';
-import { AuthService } from '../core/services/auth.service';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { take } from 'rxjs/operators';
-import { Observable, Subscription } from 'rxjs';
-import { DOCUMENT } from '@angular/common';
+import { Observable } from 'rxjs';
+
+import { Song } from '../core/models/song.model';
+import { AuthService } from '../core/services/auth.service';
+import { ModalComponent } from '../core/modal/modal.component';
 import { DownloadService } from '../core/services/download.service';
 import { Download } from '../core/models/download.model';
+import * as CryptoJS from 'crypto-js';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-home',
@@ -33,6 +26,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   download$: Observable<Download> | undefined;
 
+  encrypted: string = '';
+  decrypted: any = '';
+
   song: Song | undefined = {
     artist: 'Hillsong United',
     album: 'People',
@@ -45,13 +41,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
   };
 
   constructor(
-    private modalService: ModalService,
     public authService: AuthService,
     private downloads: DownloadService,
-    @Inject(DOCUMENT) private document: Document
+    private route: ActivatedRoute
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    // console.log(window.location.href.split('/')[3]);
+
+    this.route.params
+      .pipe(take(1))
+      .subscribe((params) => (this.encrypted = `${params.secret}=`));
+
+    console.log(this.encrypted);
+    console.log(this.decryptUsingAES256());
+  }
 
   ngAfterViewInit(): void {
     this.authService.user$.pipe(take(1)).subscribe((user) => {
@@ -70,19 +74,23 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.download$ = this.downloads.download(fileURL, fileName);
   }
 
-  openModal(id: string): void {
-    this.modalService.open(id);
-  }
-
-  closeModal(id: string): void {
-    this.modalService.close(id);
-  }
-
   googleSignIn(): any {
     this.authService.googleSignIn().then((res) => this.modal?.close());
   }
 
   facebookSignIn(): any {
     this.authService.facebookSignIn().then((res) => this.modal?.close());
+  }
+
+  decryptUsingAES256(): string {
+    const key = CryptoJS.enc.Utf8.parse(environment.secret);
+    const iv = CryptoJS.enc.Utf8.parse(environment.secret);
+
+    return (this.decrypted = CryptoJS.AES.decrypt(this.encrypted, key, {
+      keySize: 5,
+      iv,
+      mode: CryptoJS.mode.ECB,
+      padding: CryptoJS.pad.Pkcs7,
+    }).toString(CryptoJS.enc.Utf8));
   }
 }
