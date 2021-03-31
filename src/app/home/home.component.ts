@@ -29,16 +29,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   encrypted: string = '';
   decrypted: any = '';
 
-  song: Song | undefined = {
-    artist: 'Hillsong United',
-    album: 'People',
-    year: 2016,
-    albumArt:
-      'https://i1.wp.com/trevordecker.com/wp-content/uploads/2019/04/Hillsong-United-People-2019-English-Christian-Live-Album.jpg?w=1200&ssl=1',
-    archives: [
-      'http://gedlab.handza.co.mz/wp-content/uploads/2021/03/Raimundo-Sive-Yehova-Una-Hina2.mp3',
-    ],
-  };
+  song: Song | undefined;
 
   constructor(
     public authService: AuthService,
@@ -54,7 +45,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
       .subscribe((params) => (this.encrypted = `${params.secret}=`));
 
     console.log(this.encrypted);
-    console.log(this.decryptUsingAES256());
+    // console.log(this.decryptUsingAES256());
+
+    this.song = JSON.parse(this.decryptUsingAES256());
+    console.log(this.song);
   }
 
   ngAfterViewInit(): void {
@@ -86,7 +80,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const key = CryptoJS.enc.Utf8.parse(environment.secret);
     const iv = CryptoJS.enc.Utf8.parse(environment.secret);
 
-    return (this.decrypted = CryptoJS.AES.decrypt(this.encrypted, key, {
+    const regularEncrypted = this.encrypted
+      .replace(/p1L2u3S/g, '+')
+      .replace(/s1L2a3S4h/g, '/')
+      .replace(/e1Q2u3A4l/g, '=');
+
+    return (this.decrypted = CryptoJS.AES.decrypt(regularEncrypted, key, {
       keySize: 5,
       iv,
       mode: CryptoJS.mode.ECB,
