@@ -11,6 +11,7 @@ import { DownloadService } from '../core/services/download.service';
 import { Download } from '../core/models/download.model';
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
+import { MusicService } from '../core/services/music.service';
 
 @Component({
   selector: 'app-home',
@@ -34,11 +35,14 @@ export class HomeComponent implements OnInit, AfterViewInit {
   constructor(
     public authService: AuthService,
     private downloads: DownloadService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private musicService: MusicService
   ) {}
 
   ngOnInit(): void {
     // console.log(window.location.href.split('/')[3]);
+
+    this.musicService.getMusic(345).subscribe();
 
     this.route.params
       .pipe(take(1))

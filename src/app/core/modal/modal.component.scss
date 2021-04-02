@@ -87,3 +87,12 @@ body.jw-modal-open {
   /* body overflow is hidden to hide main scrollbar when modal window is open */
   overflow: hidden;
 }
+
+@media only screen and (max-width: 600px) {
+  jw-modal {
+    .jw-modal {
+      max-width: 100vw;
+      max-height: 50vh;
+    }
+  }
+}
