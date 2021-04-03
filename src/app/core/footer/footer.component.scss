@@ -1,0 +1,17 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100vw;
+
+  display: flex;
+  justify-content: space-between;
+
+  background-color: #353535;
+  padding: 2rem 3.5rem;
+  font-size: 9pt;
+  color: rgb(231, 228, 228);
+
+  .darker {
+    color: #838282;
+  }
+}

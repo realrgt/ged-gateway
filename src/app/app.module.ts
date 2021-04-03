@@ -11,9 +11,10 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { environment } from '../environments/environment';
 import { HomeModule } from './home/home.module';
 import { SAVER, getSaver } from './core/services/saver.provider';
+import { FooterComponent } from './core/footer/footer.component';
 
 @NgModule({
-  declarations: [AppComponent, HeaderComponent],
+  declarations: [AppComponent, HeaderComponent, FooterComponent],
   imports: [
     BrowserModule,
     HomeModule,
