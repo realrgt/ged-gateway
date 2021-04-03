@@ -1,6 +1,6 @@
 {
   "/api": {
-    "target": "http://gedlab.handza.co.mz/wp-content/uploads",
+    "target": "http://ged.handza.co.mz/wp-content/uploads",
     "secure": false,
     "changeOrigin": true,
     "pathRewrite": {

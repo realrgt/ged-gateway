@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { take } from 'rxjs/operators';
 
 import { Music } from '../models/music.model';
 
@@ -10,11 +10,11 @@ import { Music } from '../models/music.model';
 export class MusicService {
   constructor(private http: HttpClient) {}
 
-  getMusic(playlistId: number): Observable<Music> {
+  getMusics(playlistId: number): Observable<Music[]> {
     return this.http
-      .get<Music>(
+      .get<Music[]>(
         `https://ged.handza.co.mz/?audioigniter_playlist_id=${playlistId}`
       )
-      .pipe(take(1), tap(console.log));
+      .pipe(take(1));
   }
 }

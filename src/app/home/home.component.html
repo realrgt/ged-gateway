@@ -1,27 +1,27 @@
 <div class="ged-container">
   <div class="metadata-mpesa">
     <div class="metadata">
-      <img class="album-art" [src]="song?.albumArt" alt="albumArt" />
+      <img class="album-art" [src]="music?.cover != '' ? music?.cover : defaultCover" alt="albumArt" />
       <div class="album-details">
-        <h3 class="artist">{{ song?.artist }}</h3>
-        <p class="album-year">{{ song?.album + " - " + song?.year }}</p>
+        <h3 class="artist">{{ music?.subtitle | titlecase }}</h3>
+        <p class="album-year">{{ music?.title | titlecase }}</p>
         <button *ngIf="!displayPurchase" class="btn-purchase" (click)="this.displayPurchase = true">
           Comprar
         </button>
       </div>
     </div>
-    <app-mpesa-payment class="mpesa animate__animated animate__jackInTheBox" *ngIf="displayPurchase" [song]="song"
+    <app-mpesa-payment class="mpesa animate__animated animate__jackInTheBox" *ngIf="displayPurchase" [music]="music"
       (displayDownloadButtonEvent)="displayDownloadButton = $event">
     </app-mpesa-payment>
   </div>
 
-  <div class="playlist" *ngFor="let archive of song?.archives">
+  <div class="playlist">
     <div class="music-tile">
-      {{ archive.split("/")[7].split('.')[0] }}
-      <i *ngIf="displayDownloadButton" (click)="download(archive, archive.split('/')[7])"
+      {{ music.downloadFilename | titlecase }}
+      <i *ngIf="displayDownloadButton" (click)="download(music.downloadUrl, music.downloadFilename)"
         class="fa fa-download animate__animated animate__jackInTheBox animate__delay-4s 4s"></i>
       {{ ' ' }}
-      <i *ngIf="download$ | async as download" > {{ download.progress + ' %'}} </i>
+      <i *ngIf="download$ | async as download"> {{ download.progress + ' %'}} </i>
     </div>
   </div>
 </div>

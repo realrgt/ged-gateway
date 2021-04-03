@@ -5,5 +5,5 @@ export interface Transaction {
   username: string;
   amount: number;
   mpesaPayment: MpesaPaymentModel;
-  content?: string[];
+  content?: string;
 }

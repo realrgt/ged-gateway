@@ -7,7 +7,7 @@ import { TransactionService } from '../core/services/transaction.service';
 import { MpesaPaymentService } from './mpesa-payment.service';
 
 import Swal from 'sweetalert2';
-import { Song } from '../core/models/song.model';
+import { Music } from '../core/models/music.model';
 @Component({
   selector: 'app-mpesa-payment',
   templateUrl: './mpesa-payment.component.html',
@@ -19,7 +19,7 @@ export class MpesaPaymentComponent implements OnInit {
     phone: ['258', Validators.required],
   });
 
-  @Input() song: Song | undefined;
+  @Input() music: Music | undefined;
 
   @Output()
   displayDownloadButtonEvent = new EventEmitter<boolean>();
@@ -34,8 +34,7 @@ export class MpesaPaymentComponent implements OnInit {
   ngOnInit(): void {}
 
   onSubmit(): void {
-    const filesCount = this.song?.archives.length || 1;
-    this.setAmount(filesCount * 3);
+    this.setAmount(3);
 
     this.authService.user$.subscribe((user) => {
       if (user) {
@@ -49,7 +48,7 @@ export class MpesaPaymentComponent implements OnInit {
                 username: user.displayName,
                 amount: this.form.value.amount,
                 mpesaPayment,
-                content: this.song?.archives,
+                content: this.music?.downloadFilename,
               };
 
               this.displayDownloadButtonEvent.emit(true);

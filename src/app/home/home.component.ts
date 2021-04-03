@@ -12,6 +12,7 @@ import { Download } from '../core/models/download.model';
 import * as CryptoJS from 'crypto-js';
 import { environment } from 'src/environments/environment';
 import { MusicService } from '../core/services/music.service';
+import { Music } from '../core/models/music.model';
 
 @Component({
   selector: 'app-home',
@@ -30,7 +31,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   encrypted: string = '';
   decrypted: any = '';
 
-  song: Song | undefined;
+  defaultCover =
+    'https://ladydanville.files.wordpress.com/2012/03/blankart.png';
+
+  music: Music = {
+    title: 'Nome da música',
+    subtitle: 'Nome do cantor',
+    audio: '',
+    buyUrl: '',
+    downloadUrl: '',
+    downloadFilename: '',
+    cover: this.defaultCover,
+  };
 
   constructor(
     public authService: AuthService,
@@ -42,17 +54,18 @@ export class HomeComponent implements OnInit, AfterViewInit {
   ngOnInit(): void {
     // console.log(window.location.href.split('/')[3]);
 
-    this.musicService.getMusic(345).subscribe();
-
     this.route.params
       .pipe(take(1))
-      .subscribe((params) => (this.encrypted = `${params.secret}=`));
+      .subscribe((params) => (this.encrypted = params.secret));
 
-    console.log(this.encrypted);
-    // console.log(this.decryptUsingAES256());
+    this.decryptUsingAES256();
 
-    this.song = JSON.parse(this.decryptUsingAES256());
-    console.log(this.song);
+    const playlistId = this.decrypted.split(' ')[0];
+    const position = this.decrypted.split(' ')[1];
+
+    this.musicService
+      .getMusics(playlistId)
+      .subscribe((musics) => (this.music = musics[position]));
   }
 
   ngAfterViewInit(): void {
