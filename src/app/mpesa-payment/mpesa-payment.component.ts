@@ -1,13 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+
+import { take } from 'rxjs/operators';
+import Swal from 'sweetalert2';
 
 import { Transaction } from '../core/models/transaction.model';
 import { AuthService } from '../core/services/auth.service';
 import { TransactionService } from '../core/services/transaction.service';
 import { MpesaPaymentService } from './mpesa-payment.service';
-
-import Swal from 'sweetalert2';
 import { Music } from '../core/models/music.model';
+
 @Component({
   selector: 'app-mpesa-payment',
   templateUrl: './mpesa-payment.component.html',
@@ -36,7 +38,7 @@ export class MpesaPaymentComponent implements OnInit {
   onSubmit(): void {
     this.setAmount(3);
 
-    this.authService.user$.subscribe((user) => {
+    this.authService.user$.pipe(take(1)).subscribe((user) => {
       if (user) {
         this.mpesaPaymentService.call(this.form.value).subscribe(
           async (mpesaPayment) => {
